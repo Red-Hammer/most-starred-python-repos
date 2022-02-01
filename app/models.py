@@ -1,13 +1,20 @@
 from app import db
 
 
-class ExampleModel(db.Model):
-    """Description of Model"""
-    id = db.Column(db.Integer, primary_key=True)
-    example_1 = db.Column(db.String(255))
-    example_2 = db.Column(db.Integer, index=True, unique=False)
+class StarredReposModel(db.Model):
+    """Data Model for the Most Starred Repos Table"""
 
-    def __repr__(self):
-        return '<Question {}'.format(str(self.id) + ' ' + str(self.example_1) + ' '
-                                     + str(self.example_2)
-                                     )
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    repo_id = db.Column(db.Integer, unique=True)
+    created_datetime = db.Column(db.DateTime)
+    name = db.Column(db.Unicode)
+    description = db.Column(db.Unicode)
+    url = db.Column(db.Unicode)
+    last_push_datetime = db.Column(db.DateTime)
+    number_of_stars = db.Column(db.Integer)
+
+    def from_dict(self, row_dict):
+        for key in row_dict.keys():
+            setattr(self, key, row_dict[key])
+
+    # I could probably write an update method here too using setattr
