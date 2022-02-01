@@ -17,14 +17,21 @@
         {% endfor %}
         </tbody>
     </table>
+    <div>
+        <form method="post" action="{{ url_for('github.update_database') }}">
+            <button type="submit">Refresh Top Repos</button>
+        </form>
+    </div>
 {% endblock %}
 {% block scripts %}
     <script>
         $(document).ready(function () {
             $('#data').DataTable({
+                order: [[1, 'desc']],
                 columns: [
-                    {data: 'name'},
                     {data: 'number_of_stars', searchable: false},
+                    {data: 'name'},
+
                 ],
             });
         });

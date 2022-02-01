@@ -1,4 +1,5 @@
 import requests
+from flask import redirect, url_for
 
 from app.github import bp
 from app.github.functions import request_interface
@@ -15,6 +16,6 @@ async def update_database():
     status = await request_interface(response_dict)
 
     if status == 200:
-        return 'It worked!'
+        return redirect(url_for('main.home'))
     else:
         return 'Oh no! Something is amiss!'
