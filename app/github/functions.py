@@ -61,3 +61,11 @@ def _data_writer(df_to_write):
 
             db.session.add(srm_inst_insert)
             db.session.commit()
+
+
+async def get_data(repo_id=None):
+    if not repo_id:
+        return [repo.to_dict() for repo in StarredReposModel.query]
+    else:
+        repo = StarredReposModel.query.filter_by(repo_id=repo_id).first()
+        return [repo.to_dict()]

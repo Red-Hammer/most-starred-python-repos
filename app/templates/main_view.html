@@ -9,12 +9,12 @@
         </tr>
         </thead>
         <tbody>
-        {#      {% for repo in repos %}#}
-        {#        <tr>#}
-        {#          <td>{{ repo.name }}</td>#}
-        {#            <td>{{ repo.number_of_stars }}</td>#}
-        {#        </tr>#}
-        {#      {% endfor %}#}
+        {% for repo in repos %}
+            <tr>
+                <td><a href="{{ url_for('main.detail_view', repo_id=repo.repo_id) }}">{{ repo.name }}</a></td>
+                <td>{{ repo.number_of_stars }}</td>
+            </tr>
+        {% endfor %}
         </tbody>
     </table>
 {% endblock %}
@@ -22,7 +22,6 @@
     <script>
         $(document).ready(function () {
             $('#data').DataTable({
-                ajax: '/get-data',
                 columns: [
                     {data: 'name'},
                     {data: 'number_of_stars', searchable: false},
