@@ -9,7 +9,7 @@ async def home():
     repos = await get_data()
     return render_template(
             'main_view.html',
-            title='Main Table',
+            title='Top Starred Python Repos on Github',
             repos=repos
     )
 
@@ -19,6 +19,6 @@ async def detail_view(repo_id):
     repo = await get_data(repo_id)  # singular repo is still passed via a list to maintain consistency
     return render_template(
             'detail_view.html',
-            title='Detail Table',
+            title='Repo Detail',
             repo=repo[0]
     )

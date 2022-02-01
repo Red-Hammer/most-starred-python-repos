@@ -27,6 +27,11 @@
         </tr>
         </tbody>
     </table>
+    <div>
+        <form method="get" action="{{ url_for('main.home') }}">
+            <button class="btn btn-primary" type="submit">Back to List</button>
+        </form>
+    </div>
 {% endblock %}
 {% block scripts %}
     <script>
