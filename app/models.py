@@ -14,4 +14,14 @@ class StarredReposModel(db.Model):
     last_push_datetime = db.Column(db.DateTime)
     number_of_stars = db.Column(db.Integer)
 
-    # I could probably write an update method here too using setattr
+
+    def to_dict(self):
+        return {
+            'repo_id': self.repo_id,
+            'created_datetime': self.created_datetime,
+            'name': self.name,
+            'description': self.description,
+            'url': self.url,
+            'last_push_datetime': self.last_push_datetime,
+            'number_of_stars': self.number_of_stars
+        }

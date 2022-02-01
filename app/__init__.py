@@ -25,10 +25,16 @@ def create_app(config_class=Config):
     bootstrap.init_app(app)
 
     from app.main import bp as main_bp
+
     app.register_blueprint(main_bp)
 
     from app.github import bp as github_bp
+
     app.register_blueprint(github_bp)
+
+    from app.api import bp as api_bp
+
+    app.register_blueprint(api_bp)
 
     if not app.debug:
         if not os.path.exists('logs'):
@@ -36,7 +42,7 @@ def create_app(config_class=Config):
 
         file_handler = RotatingFileHandler('logs/app_name.log', maxBytes=10240, backupCount=50)
         file_handler.setFormatter(
-            logging.Formatter('%(asctime)s %(levelname)s: %(message)s [in %(pathname)s:%(lineno)d'))
+                logging.Formatter('%(asctime)s %(levelname)s: %(message)s [in %(pathname)s:%(lineno)d'))
         file_handler.setLevel(logging.INFO)
         app.logger.addHandler(file_handler)
 

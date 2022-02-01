@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <table id="data" class="table table-striped">
+        <thead>
+        <tr>
+            <th>Repository Name</th>
+            <th>Number of Stars</th>
+        </tr>
+        </thead>
+        <tbody>
+        {#      {% for repo in repos %}#}
+        {#        <tr>#}
+        {#          <td>{{ repo.name }}</td>#}
+        {#            <td>{{ repo.number_of_stars }}</td>#}
+        {#        </tr>#}
+        {#      {% endfor %}#}
+        </tbody>
+    </table>
+{% endblock %}
+{% block scripts %}
+    <script>
+        $(document).ready(function () {
+            $('#data').DataTable({
+                ajax: '/get-data',
+                columns: [
+                    {data: 'name'},
+                    {data: 'number_of_stars', searchable: false},
+                ],
+            });
+        });
+    </script>
+{% endblock %}
