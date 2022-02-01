@@ -1,6 +1,8 @@
-import pandas as pd
-from app import db
+import dateutil.parser
 
+import pandas as pd
+
+from app import db
 from app.exceptions import DataWriterException
 from app.models import StarredReposModel
 
@@ -12,18 +14,19 @@ async def request_interface(request_dict):  # rename this to the puller and have
         _data_writer(clean_data)
         return 200
     except Exception as e:
-        raise DataWriterException("There was issue writing the data")  # Move this to the writer
+        raise DataWriterException("There was issue writing the data")
 
 
 def _data_puller(lst_of_dicts):
     """Pulls and re-formats data from the github api"""
+    print('number of records: ' + str(len(lst_of_dicts)))
     data = pd.DataFrame(lst_of_dicts)
-    trimmed_data = data['name', 'id', 'url', 'created_at', 'pushed_at', 'description', 'stargazers_count']
-    trimmed_data.rename(columns={'id': 'repo_id', 'created_at': 'created_date', 'pushed_at': 'last_push_date',
-                                 'stargazers_count': 'number_of_stars'}, inplace=True)
-    # Select only the top 1000 based on star count
-    top_1000_df = trimmed_data.nlargest(1000, 'number_of_stars')
-    return top_1000_df
+    trimmed_data = data[['name', 'id', 'url', 'created_at', 'pushed_at', 'description', 'stargazers_count']]
+    renamed_data = trimmed_data.rename(
+            columns={'id': 'repo_id', 'created_at': 'created_date', 'pushed_at': 'last_push_date',
+                     'stargazers_count': 'number_of_stars'}, inplace=False)
+
+    return renamed_data
 
 
 def _data_writer(df_to_write):
@@ -40,14 +43,21 @@ def _data_writer(df_to_write):
             target_row.name = record['name']
             target_row.description = record['description']
             target_row.url = record['url']
-            target_row.last_push_datetime = record['last_push_datetime']
+            target_row.last_push_datetime = dateutil.parser.isoparse(record['last_push_date'])
             target_row.number_of_stars = record['number_of_stars']
 
             db.session.commit()
 
         else:
-            srm_inst_insert = StarredReposModel()
-            srm_inst_insert.from_dict(record)
+            srm_inst_insert = StarredReposModel(
+                    repo_id=record['repo_id'],
+                    created_datetime=dateutil.parser.isoparse(record['created_date']),
+                    name=record['name'],
+                    description=record['description'],
+                    url=record['url'],
+                    last_push_datetime=dateutil.parser.isoparse(record['last_push_date']),
+                    number_of_stars=record['number_of_stars']
+            )
 
             db.session.add(srm_inst_insert)
             db.session.commit()

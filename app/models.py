@@ -1,4 +1,5 @@
 from app import db
+import dateutil.parser
 
 
 class StarredReposModel(db.Model):
@@ -12,9 +13,5 @@ class StarredReposModel(db.Model):
     url = db.Column(db.Unicode)
     last_push_datetime = db.Column(db.DateTime)
     number_of_stars = db.Column(db.Integer)
-
-    def from_dict(self, row_dict):
-        for key in row_dict.keys():
-            setattr(self, key, row_dict[key])
 
     # I could probably write an update method here too using setattr
