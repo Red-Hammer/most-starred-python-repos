@@ -14,8 +14,7 @@
 
 ### Database Setup:
 
-- To initialize your local SQLite db, run `flask db init`
-- Then to get the database up to the current version, run `flask db upgrade`
+- To get the database initialized and up to the current version, run `flask db upgrade` in your terminal.
 
 ### Running the Application
 

@@ -29,9 +29,9 @@ def _data_cleaner(lst_of_dicts: List[Dict]) -> pd.DataFrame:
     :return: pd.DataFrame
     """
     data = pd.DataFrame(lst_of_dicts)
-    trimmed_data = data[['name', 'id', 'url', 'created_at', 'pushed_at', 'description', 'stargazers_count']]
+    trimmed_data = data[['name', 'id', 'html_url', 'created_at', 'pushed_at', 'description', 'stargazers_count']]
     renamed_data = trimmed_data.rename(
-            columns={'id': 'repo_id', 'created_at': 'created_date', 'pushed_at': 'last_push_date',
+            columns={'id': 'repo_id', 'html_url': 'url', 'created_at': 'created_date', 'pushed_at': 'last_push_date',
                      'stargazers_count': 'number_of_stars'}, inplace=False)
 
     return renamed_data
