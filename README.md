@@ -8,6 +8,7 @@
 - To get all the packages, run `pip install -r requirements.txt`
 - Create a `.env` file in your base directory and add in:
 
+
     SECRET_KEY=your-secret-key-here
     
     FLASK_APP=app.py
@@ -21,7 +22,11 @@
 - Run `flask run` in your terminal and navigate to http://127.0.0.1:5000/
 - You will see an empty repository table. Go ahead and populate the data by clicking the 'Refresh Top Repos Button'
   - Without GitHub authentication, we can only run this 10 times per minute due to GitHub's rate limit.
-- You've got data now! Hooray! You can navigate to a repository's details page by clicking on it's name in the table.
+- You've got data now! Hooray! You can navigate to a repository's details page by clicking on its name in the table.
+
+## Pytest Unit Testing
+
+Once you complete the above steps, you can run the pytest unit tests by running `pytest` in your terminal
 
 ## Architecture Decisions and Rationale
 
@@ -42,7 +47,7 @@ function. The request_interface orchestrates the cleaning and finally writing of
 private function pulls all the json records into one Pandas DataFrame, then, using pandas builtin methods, it trims the
 data down to the desired columns and renames those columns to more user-friendly names. The formatted data is then
 passed into the data_writer private function. This function pulls the records back out of the DataFrame and into a list
-of dictionaries. It then checks each record to see if it's repository ID already exists in the database. If it does, the
+of dictionaries. It then checks each record to see if its repository ID already exists in the database. If it does, the
 function grabs that database record via a SQLAlchemy Model and updates its fields using the new source. If the record
 does not exist, a new database record is created and written. In each of these cases, the 'last_push_date' and '
 created_date' fields are converted out of ISO 8601 datetime strings and into datetime.datetime objects using dateutil's

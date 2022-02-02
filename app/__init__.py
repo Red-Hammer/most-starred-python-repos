@@ -1,11 +1,13 @@
+import os
+import logging
+from logging.handlers import RotatingFileHandler
+
 from flask import Flask
 from config import Config
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from flask_mail import Mail
-import logging
-from logging.handlers import RotatingFileHandler
-import os
+
 from flask_bootstrap import Bootstrap
 
 db = SQLAlchemy()
