@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <table id="data" class="table table-striped">
+        <thead>
+        <tr>
+            <th>Repository Name</th>
+            <th>Number of Stars</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for repo in repos %}
+            <tr>
+                <td><a href="{{ url_for('main.detail_view', repo_id=repo.repo_id) }}">{{ repo.name }}</a></td>
+                <td>{{ repo.number_of_stars }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <div>
+        <form method="post" action="{{ url_for('github.update_database') }}">
+            <button class="btn btn-primary" type="submit">Refresh Top Repos</button>
+        </form>
+    </div>
+{% endblock %}
+{% block scripts %}
+    <script>
+        $(document).ready(function () {
+            $('#data').DataTable({
+                searching: false,
+                order: [[1, 'desc']],
+                columns: [
+                    {data: 'number_of_stars', searchable: false},
+                    {data: 'name', searchable: true},
+
+                ],
+            });
+        });
+    </script>
+{% endblock %}

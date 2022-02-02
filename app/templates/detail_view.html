@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <table id="data" class="table table-striped">
+        <thead>
+        <tr>
+            <th>Repository ID</th>
+            <th>Repository Name</th>
+            <th>Datetime Created</th>
+            <th>Description</th>
+            <th>URL</th>
+            <th>Datetime of Last Push</th>
+            <th>Number of Stars</th>
+
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>{{ repo.repo_id }}</td>
+            <td>{{ repo.name }}</td>
+            <td>{{ repo.created_datetime }}</td>
+            <td>{{ repo.description }}</td>
+            <td>{{ repo.url }}</td>
+            <td>{{ repo.last_push_datetime }}</td>
+            <td>{{ repo.number_of_stars }}</td>
+
+        </tr>
+        </tbody>
+    </table>
+    <div>
+        <form method="get" action="{{ url_for('main.home') }}">
+            <button class="btn btn-primary" type="submit">Back to List</button>
+        </form>
+    </div>
+{% endblock %}
+{% block scripts %}
+    <script>
+        $(document).ready(function () {
+            $('#data').DataTable({
+                searching: false,
+                paging: false,
+                ordering: false
+            });
+        });
+    </script>
+{% endblock %}
