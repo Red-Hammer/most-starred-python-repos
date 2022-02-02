@@ -5,7 +5,7 @@
 - Open a terminal in the project directory and type the command `python3 -m venv .venv`
 - Then enter the virtual environment with `source .venv/bin/activate` (`.venv\Scripts\activate` on Windows)
 - From now on, any terminal commands should be run in the venv environment
-- To get all the packages, run `pip install -r requirements.txt`
+- To get all the required packages, run `pip install -r requirements.txt`
 - Create a `.env` file in your base directory and add in:
 
 
@@ -19,7 +19,7 @@
 
 ### Running the Application
 
-- Run `flask run` in your terminal and navigate to http://127.0.0.1:5000/
+- Run `flask run` in your terminal and navigate to the local address indicated in the terminal output.
 - You will see an empty repository table. Go ahead and populate the data by clicking the 'Refresh Top Repos Button'
   - Without GitHub authentication, we can only run this 10 times per minute due to GitHub's rate limit.
 - You've got data now! Hooray! You can navigate to a repository's details page by clicking on its name in the table.
