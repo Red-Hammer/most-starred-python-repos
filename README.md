@@ -24,7 +24,7 @@
   - Without GitHub authentication, we can only run this 10 times per minute due to GitHub's rate limit.
 - You've got data now! Hooray! You can navigate to a repository's details page by clicking on its name in the table.
 
-## Pytest Unit Testing
+### Pytest Unit Testing
 
 Once you complete the above steps, you can run the pytest unit tests by running `pytest` in your terminal
 
