@@ -8,7 +8,6 @@ from logging.handlers import RotatingFileHandler
 import os
 from flask_bootstrap import Bootstrap
 
-
 db = SQLAlchemy()
 migrate = Migrate()
 mail = Mail()
@@ -31,10 +30,6 @@ def create_app(config_class=Config):
     from app.github import bp as github_bp
 
     app.register_blueprint(github_bp)
-
-    from app.api import bp as api_bp
-
-    app.register_blueprint(api_bp)
 
     if not app.debug:
         if not os.path.exists('logs'):

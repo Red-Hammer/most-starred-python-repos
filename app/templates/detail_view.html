@@ -36,7 +36,11 @@
 {% block scripts %}
     <script>
         $(document).ready(function () {
-            $('#data').DataTable();
+            $('#data').DataTable({
+                searching: false,
+                paging: false,
+                ordering: false
+            });
         });
     </script>
 {% endblock %}

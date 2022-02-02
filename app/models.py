@@ -1,5 +1,6 @@
+from typing import Dict
+
 from app import db
-import dateutil.parser
 
 
 class StarredReposModel(db.Model):
@@ -15,7 +16,11 @@ class StarredReposModel(db.Model):
     number_of_stars = db.Column(db.Integer)
 
 
-    def to_dict(self):
+    def to_dict(self) -> Dict:
+        """
+        Pulls an instance's table row into a dictionary
+        :return: Dictionary representing one table record
+        """
         return {
             'repo_id': self.repo_id,
             'created_datetime': self.created_datetime,

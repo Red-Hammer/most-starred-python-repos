@@ -10,6 +10,14 @@
 <div class="container">
     <h1>{{ title }}</h1>
     <hr>
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <ul class=flashes></ul>
+            {% for message in messages %}
+                <li style="color:red">{{ message }} </li>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
     {% block content %}{% endblock %}
 </div>
 <script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

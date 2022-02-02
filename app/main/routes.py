@@ -1,6 +1,7 @@
 from flask import render_template
+
 from app.main import bp
-from app.github.functions import get_data
+from app.main.functions import get_data
 
 
 @bp.route('/')
@@ -15,7 +16,7 @@ async def home():
 
 
 @bp.route('/detail-view/<int:repo_id>', methods=['GET', 'POST'])
-async def detail_view(repo_id):
+async def detail_view(repo_id: int):
     repo = await get_data(repo_id)  # singular repo is still passed via a list to maintain consistency
     return render_template(
             'detail_view.html',

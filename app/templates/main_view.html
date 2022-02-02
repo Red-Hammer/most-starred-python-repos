@@ -27,10 +27,11 @@
     <script>
         $(document).ready(function () {
             $('#data').DataTable({
+                searching: false,
                 order: [[1, 'desc']],
                 columns: [
                     {data: 'number_of_stars', searchable: false},
-                    {data: 'name'},
+                    {data: 'name', searchable: true},
 
                 ],
             });
